@@ -44,33 +44,35 @@ LETTERS = "ABCDEFGHIJ"
 aircraft_carrier = {(2, 2): True, (2,3): True, (2, 4): True, (2, 5): True, (2, 6): True}  # porte_avion en B2
 cruiser          = {(4, 1): True, (5, 1): True, (6, 1): True, (7, 1): True}  # croiseur en A4
 destroyer        = {(5, 3): True, (6, 3): True, (7, 3): True}  # contre_torpilleur en C5
-submarine        = {(5, 8): True, (5, 9): True, (5,10): True}  # sous_marin en H5
+submarine        = {(5, 7): True, (5, 8): True, (5,9): True}  # sous_marin en H5
 torpedo_boat     = {(9, 5): True, (9, 6): True}  # torpilleur en E9
-ships_list = [aircraft_carrier, cruiser, destroyer, submarine, torpedo_boat]
+ships_list = [aircraft_carrier, cruiser, destroyer,submarine, torpedo_boat]
 
 
-while len(ships_list) >1:
-    nb = input("Entrer la ligne d'un tir :")
-    for a in aircraft_carrier:
-        if a[0] == int(tuple(nb)[0]) and a[1] == int(tuple(nb)[1]):
-            aircraft_carrier[a[0], a[1]] = False
-            for ship in ships_list:
-                print(ship)
+while len(ships_list) >0:
+    nb = input("Entrer les coordonnées d'un tir 99(max) :")
+    nb = (int(nb[0]), int(nb[1]))
+    for ships in ships_list:
+        if nb in ships:
+            ships[nb[0], nb[1]] = False
+            print("touché", nb)
+            if all(value is False for value in ships.values()):
+                print("coulé")
+                ships_list.remove(ships)
+                print(ships_list)
             break
     else:
-        print("Raté")
+        print("raté")
+
 else:
     print("terminé")
 
-for ship in ships_list:
-    print(ship)
-print("")
-aircraft_carrier = {(2, 2): True, (2, 3): True, (2, 4): True, (2, 5): True, (2, 6): True}  # porte_avion en B2
-aircraft_carrier[(2, 3)]  # connaitre l'état de la case C2
-
-aircraft_carrier[(2, 3)] = False  # indiquer que cette case est touchée
-
-(2, 3) in aircraft_carrier  # savoir si (2, 3) (case C2) fait partie des clés de ce dictionnaire
-
-(2, 7) in aircraft_carrier  # savoir si (2, 7) (case G2) fait partie des clés de ce diictionnaire
+# aircraft_carrier = {(2, 2): True, (2, 3): True, (2, 4): True, (2, 5): True, (2, 6): True}  # porte_avion en B2
+# aircraft_carrier[(2, 3)]  # connaitre l'état de la case C2
+#
+# aircraft_carrier[(2, 3)] = False  # indiquer que cette case est touchée
+#
+# (2, 3) in aircraft_carrier  # savoir si (2, 3) (case C2) fait partie des clés de ce dictionnaire
+#
+# (2, 7) in aircraft_carrier  # savoir si (2, 7) (case G2) fait partie des clés de ce diictionnaire
 
